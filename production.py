@@ -39,7 +39,6 @@ st.sidebar.image('corplogo.PNG', use_column_width=True)
 
 uploaded_file = st.sidebar.file_uploader("Upload Production Listing",  type=['csv', 'xlsx', 'xls'], kwargs=None,)
 
-
 if uploaded_file is not None:
     try:
         if uploaded_file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
@@ -92,10 +91,6 @@ if uploaded_file is not None:
     headers = data[0]
     data = data[1:]
     lastdf = pd.DataFrame(data, columns=headers)  # Convert data to a DataFrame
-    
-    listed = lastdf['INTERMEDIARY'].to_list
-
-    print(listed)
     
     newdf = pd.merge(thedf, lastdf, on='INTERMEDIARY', how='left')
     newdf.loc[newdf['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
@@ -154,7 +149,9 @@ if uploaded_file is not None:
         bar = newdf.groupby('BRANCH')['GROSS PREMIUM'].sum().reset_index()
         bar2 = this_week.groupby('DayOfWeek')['GROSS PREMIUM'].sum().reset_index()
 
-        total_amount = f"Ksh.{this_week['GROSS PREMIUM'].sum():,}"
+        total_weekly = f"Ksh.{this_week['GROSS PREMIUM'].sum():,.0f}"
+
+        total_amount = f"<span style='color:red'>{total_weekly}</span>"
 
         bar['Percentage'] = (bar['GROSS PREMIUM']/(bar['GROSS PREMIUM'].sum()) * 100)
                
@@ -201,7 +198,7 @@ if uploaded_file is not None:
                          y= bar["GROSS PREMIUM"]        
                          ))
         
-                fig.update_layout(title={'text': 'MONTH TO DATE BRANCH PERFORMANCE', 'x': 0.5, 'xanchor': 'center'}, width=450) 
+                fig.update_layout(title={'text': 'MONTH TO DATE BRANCH PERFORMANCE', 'x': 0.5, 'xanchor': 'center'}, width=425) 
         
                 with cols2[0]: 
                     st.plotly_chart(fig)
@@ -215,13 +212,13 @@ if uploaded_file is not None:
                          ))
                  # Add an annotation for the total amount
                 fig2.add_annotation(
-                    x= bar2['DayOfWeek'].index[-1],
+                    x= bar2['DayOfWeek'].index[-3],
                     y= bar2['GROSS PREMIUM'],                     
-                    text=f'Total Week To Date: {total_amount}',
-                    font=dict(size=20)                
+                    text=f'Week To Date Production: &nbsp; {total_amount}',
+                    font=dict(size=18)                
                 )
         
-                fig2.update_layout(title={'text': 'THIS WEEK AGGREGATE DAILY PRODUCTION', 'x': 0.5, 'xanchor': 'center'}, width=550, xaxis=dict(categoryorder='array', categoryarray=["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], tickfont=dict(size=12))) 
+                fig2.update_layout(title={'text': 'THIS WEEK AGGREGATE DAILY PRODUCTION', 'x': 0.5, 'xanchor': 'center'}, width=525, xaxis=dict(categoryorder='array', categoryarray=["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], tickfont=dict(size=12))) 
         
                 with cols2[1]: 
                     st.plotly_chart(fig2)
