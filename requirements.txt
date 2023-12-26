@@ -1,3 +1,6 @@
 openpyxl
 plotly
 hydralit_components
+streamlit-aggrid
+streamlit_shadcn_ui
+gspread
