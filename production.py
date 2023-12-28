@@ -212,7 +212,7 @@ if uploaded_file is not None:
                          ))
                  # Add an annotation for the total amount
                 fig2.add_annotation(
-                    x= bar2['DayOfWeek'].index[-3],
+                    x= bar2['DayOfWeek'].index[1],
                     y= bar2['GROSS PREMIUM'],                     
                     text=f'Week To Date Production: &nbsp; {total_amount}',
                     font=dict(size=18)                
