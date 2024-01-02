@@ -444,7 +444,7 @@ if uploaded_file is not None:
                 if isinstance(most_recent_longdate, pd.Series):
                     most_recent_longdate = most_recent_longdate.iloc[0]
                     
-                formatted_date = most_recent_longdate.strftime('%A %d %B %Y') 
+                formatted_date = most_recent_longdate.strftime('%A %d %B') 
                 st.subheader(f'{formatted_date} Production Summary')
                 
                 with card_container(key="chart4"):
