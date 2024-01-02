@@ -362,7 +362,7 @@ if uploaded_file is not None:
                                     ))
                             
                     
-                            fig2.update_layout(title={'text': 'MONTH PRODUCTION ANALYSIS', 'x': 0.5, 'xanchor': 'center'}, width=475, xaxis=dict(categoryorder='array', categoryarray=["1st Quarter", "2nd Quarter", "3rd Quarter", "4th Quarter"], tickfont=dict(size=9)))
+                            fig2.update_layout(title={'text': 'MONTH PRODUCTION ANALYSIS', 'x': 0.5, 'xanchor': 'center'}, width=475, xaxis=dict(categoryorder='array', categoryarray=["1st Quarter", "2nd Quarter", "3rd Quarter", "4th Quarter"], tickfont=dict(size=12)))
                             
                             st.plotly_chart(fig2)
 
