@@ -438,14 +438,14 @@ if uploaded_file is not None:
 
 
             with tab_four:
-                most_recent_date = df2['TRANSACTION DATE'].max()
+                most_recent_longdate = df2['TRANSACTION DATE'].max()
 
                 # Ensure most_recent_date is a single datetime object
-                if isinstance(most_recent_date, pd.Series):
-                    most_recent_date = most_recent_date.iloc[0]
+                if isinstance(most_recent_longdate, pd.Series):
+                    most_recent_longdate = most_recent_longdate.iloc[0]
                     
-                formatted_date = most_recent_date.strftime('%A %d %B %Y') 
-                st.subheader(f'{formatted_date} PRODUCTION SUMMARY')
+                formatted_date = most_recent_longdate.strftime('%A %d %B %Y') 
+                st.subheader(f'{formatted_date} Production Summary')
                 
                 with card_container(key="chart4"):
                     yesterday_cc= st.columns(4)
