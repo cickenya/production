@@ -438,7 +438,12 @@ if uploaded_file is not None:
 
 
             with tab_four:
-                most_recent_longdate = most_recent_date.iloc[0]
+                most_recent_date = df2['TRANSACTION DATE'].max()
+
+                # Ensure most_recent_date is a single datetime object
+                if isinstance(most_recent_date, pd.Series):
+                    most_recent_date = most_recent_date.iloc[0]
+                    
                 formatted_date = most_recent_longdate.strftime('%A %d %B %Y') 
                 st.subheader(f'{formatted_date} PRODUCTION SUMMARY')
                 
