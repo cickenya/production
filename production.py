@@ -185,19 +185,6 @@ if uploaded_file is not None:
         
         else:
 
-            # Check if it's the first day of the month or if the third day of the month is a Monday
-            if current_date.day == 1 or (current_date.day == 3 and current_date.monthday() == 0):  # 0 represents Monday
-                # Subtract one month to get the previous month
-                previous_month = current_date - timedelta(days=current_date.day)
-                previous_month_name = previous_month.strftime('%B').upper()
-
-                # Use the previous month's name in the header
-                st.subheader(f"{previous_month_name} PRODUCTION DASHBOARD - TARGET KES 45M")
-            else:
-                # Use the current month's name in the header
-                current_month_name = current_date.strftime('%B').upper()
-                st.subheader(f"{current_month_name} PRODUCTION DASHBOARD - TARGET KES 45M")
-            
 
             motor = total_motor_produce[total_motor_produce['STAMP DUTY'] == 'MOTOR']
             nonmotor = total_motor_produce[total_motor_produce['STAMP DUTY'] == 'NON-MOTOR']
@@ -277,6 +264,20 @@ if uploaded_file is not None:
                         st.plotly_chart(fig2)
 
                 with tab2:  
+                    
+                    # Check if it's the first day of the month or if the third day of the month is a Monday
+                    if current_date.day == 1 or (current_date.day == 3 and current_date.monthday() == 0):  # 0 represents Monday
+                        # Subtract one month to get the previous month
+                        previous_month = current_date - timedelta(days=current_date.day)
+                        previous_month_name = previous_month.strftime('%B').upper()
+        
+                        # Use the previous month's name in the header
+                        st.subheader(f"{previous_month_name} PRODUCTION DASHBOARD - TARGET KES 45M")
+                    else:
+                        # Use the current month's name in the header
+                        current_month_name = current_date.strftime('%B').upper()
+                        st.subheader(f"{current_month_name} PRODUCTION DASHBOARD - TARGET KES 45M")
+            
                     with card_container(key="year_chart_tab2"):
                 
                         fig3 = go.Figure()
