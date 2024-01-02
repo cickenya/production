@@ -265,13 +265,13 @@ if uploaded_file is not None:
                         fig2 = go.Figure()
                 
                         fig2.add_trace(go.Bar(
-                                width= 0.75,
+                                width= 0.5,
                                 x= bar['MONTH NAME'],
                                 y= bar['GROSS PREMIUM'],       
                                 ))
                         
                 
-                        fig2.update_layout(title={'text': 'MONTHLY AGGREGATE PRODUCTION', 'x': 0.5, 'xanchor': 'center'}, width=900, xaxis=dict(categoryorder='array', categoryarray=["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"], tickfont=dict(size=12))) 
+                        fig2.update_layout(title={'text': 'MONTHLY AGGREGATE PRODUCTION', 'x': 0.5, 'xanchor': 'center'}, width=975, xaxis=dict(categoryorder='array', categoryarray=["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"], tickfont=dict(size=10))) 
                 
                         
                         st.plotly_chart(fig2)
@@ -288,7 +288,7 @@ if uploaded_file is not None:
                                 ))
                         
                 
-                        fig3.update_layout(title={'text': 'BRANCH PERFORMANCE', 'x': 0.5, 'xanchor': 'center'}, width=900) 
+                        fig3.update_layout(title={'text': 'BRANCH PERFORMANCE', 'x': 0.5, 'xanchor': 'center'}, width=975) 
                 
                         
                         st.plotly_chart(fig3)
@@ -360,7 +360,7 @@ if uploaded_file is not None:
                                     ))
                             
                     
-                            fig2.update_layout(title={'text': 'MONTH PRODUCTION ANALYSIS', 'x': 0.5, 'xanchor': 'center'}, width=425, xaxis=dict(categoryorder='array', categoryarray=["1st Quarter", "2nd Quarter", "3rd Quarter", "4th Quarter"], tickfont=dict(size=9)))
+                            fig2.update_layout(title={'text': 'MONTH PRODUCTION ANALYSIS', 'x': 0.5, 'xanchor': 'center'}, width=475, xaxis=dict(categoryorder='array', categoryarray=["1st Quarter", "2nd Quarter", "3rd Quarter", "4th Quarter"], tickfont=dict(size=9)))
                             
                             st.plotly_chart(fig2)
 
