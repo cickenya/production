@@ -172,12 +172,15 @@ if uploaded_file is not None:
     preview_sorted = preview.sort_values(by='GROSS PREMIUM', ascending=False).head(10)
 
     if view == 'Company':
-        # Check if there is no data between 1st Jan and 5th Jan
-        date_range_mask = (df2['TRANSACTION DATE'] >= '2024-01-01') & (df2['TRANSACTION DATE'] <= '2024-01-05')
-        no_data_between_1st_and_5th = df2[date_range_mask].empty
+         # Convert the 'Date' column to datetime format
+        df2['TRANSACTION DATE'] = pd.to_datetime(df2['TRANSACTION DATE'], format='%m/%d/%Y')
 
-        # Display warning if there is no data
-        if no_data_between_1st_and_5th:
+        
+        # Check if there are no January dates
+        no_january_dates = (df2['TRANSACTION DATE'].dt.month != 1).all()
+
+        # Display warning if there are no January dates
+        if no_january_dates:       
             st.warning("Kindly Upload Year to Date Data.")
         
         else:
