@@ -375,6 +375,7 @@ if uploaded_file is not None:
 
                 
             with tab_three:
+                st.subheader('WEEK TO DATE PRODUCTION SUMMARY')
 
                 with card_container(key="week_chart_one"):
                     cc = st.columns(5)
@@ -437,6 +438,7 @@ if uploaded_file is not None:
 
 
             with tab_four:
+                st.subheader('YESTERDAY PRODUCTION SUMMARY')
                 
                 with card_container(key="chart4"):
                     yesterday_cc= st.columns(4)
