@@ -224,6 +224,7 @@ if uploaded_file is not None:
             tab_one, tab_two, tab_three, tab_four = st.tabs(["Year to Date", "Month to Date", "Week To Date", "Yesterday"])
             
             with tab_one:
+                st.subheader('YEAR TO DATE PRODUCTION SUMMARY')
 
                 with card_container(key="year"):
                     cc = st.columns(5)
@@ -298,11 +299,11 @@ if uploaded_file is not None:
                     previous_month_name = previous_month.strftime('%B').upper()
     
                     # Use the previous month's name in the header
-                    st.subheader(f"{previous_month_name} PRODUCTION DASHBOARD - TARGET KES 45M")
+                    st.subheader(f"{previous_month_name} PRODUCTION SUMMARY - TARGET KES 45M")
                 else:
                     # Use the current month's name in the header
                     current_month_name = current_date.strftime('%B').upper()
-                    st.subheader(f"{current_month_name} PRODUCTION DASHBOARD - TARGET KES 45M")
+                    st.subheader(f"{current_month_name} PRODUCTION SUMMARY - TARGET KES 45M")
                         
                 with card_container(key="month_chart"):
                     cc = st.columns(5)
