@@ -438,7 +438,8 @@ if uploaded_file is not None:
 
 
             with tab_four:
-                st.subheader('YESTERDAY PRODUCTION SUMMARY')
+                formatted_date = most_recent_date.strftime('%A %d %B %Y') 
+                st.subheader(f'{formatted_date} PRODUCTION SUMMARY')
                 
                 with card_container(key="chart4"):
                     yesterday_cc= st.columns(4)
