@@ -322,7 +322,7 @@ if uploaded_file is not None:
                         hc.info_card(title='New Business', content=f'{month_nbp}%',bar_value=44, title_text_size='medium', key='mth_biz', sentiment='good',  content_text_size = 'medium')
             
                     with cc[4]:
-                        hc.info_card(title='Portfolio Mix', content=f'{month_final_mix}%',bar_value=44, title_text_size='medium', key='mth_mix', sentiment='good',  content_text_size = 'medium')
+                        hc.info_card(title='Portfolio Mix', content=f'{month_final_mix}% Motor',bar_value=44, title_text_size='medium', key='mth_mix', sentiment='good',  content_text_size = 'medium')
 
 
                 tab1, tab2 = st.tabs(["📈 This Month Production Summary", "🗃 Preview This Month Data"])
@@ -394,7 +394,7 @@ if uploaded_file is not None:
                         hc.info_card(title='New Business', content=f'{week_nbp}%',bar_value=44, title_text_size='medium', key='week_biz', sentiment='good',  content_text_size = 'medium')
             
                     with cc[4]:
-                        hc.info_card(title='Portfolio Mix', content=f'{week_final_mix}%',bar_value=44, title_text_size='medium', key='week_mix', sentiment='good',  content_text_size = 'medium')
+                        hc.info_card(title='Portfolio Mix', content=f'{week_final_mix}% Motor',bar_value=44, title_text_size='medium', key='week_mix', sentiment='good',  content_text_size = 'medium')
             
                     
                 tab1, tab2 = st.tabs(["📈 This Week Production Summary", "🗃 Preview This Week Data"])
