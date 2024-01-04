@@ -594,7 +594,7 @@ if uploaded_file is not None:
       
 
         # Filter the DataFrame based on the selected branch
-        filtered_df = newdf[(newdf['NEW TM'] == selected_manager) & (newdf['MONTH NAME'] == current_month_name)]
+        filtered_df = newdf[(newdf['NEW TM'] == selected_manager)]
         filtered_target = target[(target['NEW TM'] == selected_manager) & (target['MONTH'] == current_month_name)]
         total = int(filtered_target['TOTAL'].sum())
         target_total = "{:,.0f}".format(total)
