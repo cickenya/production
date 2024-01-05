@@ -117,9 +117,9 @@ if uploaded_file is not None:
         
             # Check if the date to adjust is a Saturday (5) or Sunday (6)
             if date_to_adjust.weekday() == 5:  # Saturday
-                date_to_adjust -= timedelta(days=1)
+                adjusted_date = date_to_adjust - timedelta(days=1)
             elif date_to_adjust.weekday() == 6:  # Sunday
-                date_to_adjust -= timedelta(days=2)
+                adjusted_date = date_to_adjust - timedelta(days=2)
             else:
                 adjusted_date = date_to_adjust
     
