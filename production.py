@@ -112,7 +112,7 @@ if uploaded_file is not None:
         saturday = most_recent_date['GROSS PREMIUM'].sum()
         yesterday = (friday + saturday)
     elif most_recent_date.iloc[0].weekday() == 6:
-        sunday = most_recent_date['GROSS PREMIUM'].sum()
+         sunday = most_recent_date['GROSS PREMIUM'].sum()
          yesterday = (friday + saturday + sunday)
     else:
         yesterday = most_recent_date['GROSS PREMIUM'].sum()
