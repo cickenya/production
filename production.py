@@ -131,10 +131,11 @@ if uploaded_file is not None:
 
     friday_df = this_week[this_week['DayOfWeek'] == 'Friday']
     friday = friday_df['GROSS PREMIUM'].sum()
+    friday_cancelled = friday_df[friday_df['GROSS PREMIUM']<0].sum()
     friday_receipts = friday_df[friday_df['RECEIPTS']>0].sum()
     friday_credits = friday_df[friday_df['NET BALANCE'].sum()
-    friday_canc = friday_df[friday_df['GROSS PREMIUM']<0]
-    friday_cancelled = friday_canc['GROSS PREMIUM'].sum()
+   
+    
     
     saturday_df = this_week[this_week['DayOfWeek'] == 'Saturday']
     saturday = saturday_df['GROSS PREMIUM'].sum()
