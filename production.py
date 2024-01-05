@@ -102,6 +102,29 @@ if uploaded_file is not None:
     new_business_percent = ((new_business['GROSS PREMIUM'].sum())/(newdf['GROSS PREMIUM'].sum()) * 100)
     nbp = "{:,.0f}".format(new_business_percent)
 
+
+    # WEEK 
+    # Get transactions done in the current week
+    this_week = newdf[((newdf['TRANSACTION DATE']).dt.date >= start_of_week.date()) & ((newdf['TRANSACTION DATE']).dt.date <= end_of_week.date())]
+
+    week_gp = this_week['GROSS PREMIUM'].sum()
+    week_total_gp = "Ksh. {:,.0f}".format(week_gp)
+
+    week_receipted = this_week['RECEIPTS'].sum()
+    week_total_receipted = "Ksh. {:,.0f}".format(week_receipted)
+
+    week_credit = this_week['NET BALANCE'].sum()
+    week_total_credit = "Ksh. {:,.0f}".format(week_credit)
+
+    week_mix = this_week[this_week['PORTFOLIO MIX'] == 'Motor']
+    week_mix_percent = ((week_mix['GROSS PREMIUM'].sum())/(this_week['GROSS PREMIUM'].sum()) * 100)
+    week_final_mix = "{:,.0f}".format(week_mix_percent)
+
+    week_new_business = this_week[this_week['SALES TYPE'] == 'New Business']
+    week_new_business_percent = ((week_new_business['GROSS PREMIUM'].sum())/(this_week['GROSS PREMIUM'].sum()) * 100)
+    week_nbp = "{:,.0f}".format(week_new_business_percent)
+
+
     # MOST RECENT (YESTERDAY)
     most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
     first_recent_date = most_recent_date.iloc[-1]   
@@ -134,27 +157,6 @@ if uploaded_file is not None:
     cancelled_yesterday_df = most_recent_date[most_recent_date['GROSS PREMIUM'] < 0]
     cancelled_yesterday = cancelled_yesterday_df['GROSS PREMIUM'].sum()
     amount_yesterday_cancelled = "Ksh. {:,.0f}".format(cancelled_yesterday)
-
-    # WEEK 
-    # Get transactions done in the current week
-    this_week = newdf[((newdf['TRANSACTION DATE']).dt.date >= start_of_week.date()) & ((newdf['TRANSACTION DATE']).dt.date <= end_of_week.date())]
-
-    week_gp = this_week['GROSS PREMIUM'].sum()
-    week_total_gp = "Ksh. {:,.0f}".format(week_gp)
-
-    week_receipted = this_week['RECEIPTS'].sum()
-    week_total_receipted = "Ksh. {:,.0f}".format(week_receipted)
-
-    week_credit = this_week['NET BALANCE'].sum()
-    week_total_credit = "Ksh. {:,.0f}".format(week_credit)
-
-    week_mix = this_week[this_week['PORTFOLIO MIX'] == 'Motor']
-    week_mix_percent = ((week_mix['GROSS PREMIUM'].sum())/(this_week['GROSS PREMIUM'].sum()) * 100)
-    week_final_mix = "{:,.0f}".format(week_mix_percent)
-
-    week_new_business = this_week[this_week['SALES TYPE'] == 'New Business']
-    week_new_business_percent = ((week_new_business['GROSS PREMIUM'].sum())/(this_week['GROSS PREMIUM'].sum()) * 100)
-    week_nbp = "{:,.0f}".format(week_new_business_percent)
 
     # THIS MONTH
     this_month = newdf[newdf['MONTH NAME'] == current_month_name]
