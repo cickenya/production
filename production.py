@@ -652,7 +652,7 @@ if uploaded_file is not None:
         month_premium = filtered_df['GROSS PREMIUM'].sum()
         fom_month_premium = "Ksh. {:,.0f}".format(month_premium)
         month_share = ((month_premium)/(month_gp) * 100)
-        month_final_share = "{:,.0f}".format(month_share)
+        month_final_share = "{:,.2f}".format(month_share)
         month_receipts = filtered_df['RECEIPTS'].sum()
         fom_month_receipts = "Ksh. {:,.0f}".format(month_receipts)
         month_credit = filtered_df['NET BALANCE'].sum()
@@ -719,7 +719,7 @@ if uploaded_file is not None:
       
         fom_day_premium = "Ksh. {:,.0f}".format(tm_yesterday)     
         yesterday_share = ((tm_yesterday)/(yesterday) * 100)
-        yesterday_final_share = "{:,.0f}".format(yesterday_share)
+        yesterday_final_share = "{:,.2f}".format(yesterday_share)
         fom_day_receipts = "Ksh. {:,.0f}".format(yesterday_receipts_total)        
         fom_day_credit = "Ksh. {:,.0f}".format(yesterday_credit_total)
         amount_daily_cancelled = "Ksh. {:,.0f}".format(cancelled_yesterday)
@@ -747,7 +747,7 @@ if uploaded_file is not None:
         week_premium = filtered_data['GROSS PREMIUM'].sum()
         fom_week_premium = "Ksh. {:,.0f}".format(week_premium)
         week_share = ((week_premium)/(week_gp)*100)
-        week_final_share = "{:,.0f}".format(week_share)
+        week_final_share = "{:,.2f}".format(week_share)
         week_receipts = filtered_data[filtered_data['RECEIPTS'] > 0]
         week_receipts_total = week_receipts['RECEIPTS'].sum()
         fom_week_receipts = "Ksh. {:,.0f}".format(week_receipts_total)
