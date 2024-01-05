@@ -816,10 +816,10 @@ if uploaded_file is not None:
                 hc.info_card(title='Yesterday Receipted', content= f'{fom_day_receipts}',bar_value=12, key='day_receipts', sentiment='good',  content_text_size='large', title_text_size='small')
     
             with cc_row2[2]:
-                hc.info_card(title='Yesterday Share of GWP', content=f'{yesterday_final_share} %', key='day_credit', sentiment='neutral', bar_value=55, content_text_size='large', title_text_size='small')
+                hc.info_card(title='Yesterday Share of GWP', content=f'{yesterday_final_share} %', key='day_credit', sentiment='neutral', bar_value=55, content_text_size='big', title_text_size='small')
     
             with cc_row2[3]:
-                hc.info_card(title='Yesterday Cancellations', content=f'{amount_daily_cancelled}',bar_value=2, key='cancelled', sentiment='bad',title_text_size='small', content_text_size = 'large')
+                hc.info_card(title='Yesterday Cancellations', content=f'{amount_daily_cancelled}',bar_value=2, key='cancelled', sentiment='bad',title_text_size='small', content_text_size = 'big')
 
 
 
