@@ -779,7 +779,7 @@ if uploaded_file is not None:
                 hc.info_card(title='Month To Date Receipted', content=f'{fom_month_receipts}',bar_value=12,  title_text_size='small', sentiment='good', content_text_size='medium')
     
             with cc[2]:
-                hc.info_card(title='Month To Date On Credit', content=f'{month_final_share} %', sentiment='neutral',  title_text_size='small', bar_value=55, content_text_size='medium')
+                hc.info_card(title='Month To Date Share of GWP', content=f'{month_final_share} %', sentiment='neutral',  title_text_size='small', bar_value=55, content_text_size='medium')
     
             with cc[3]:
                 hc.info_card(title='Month To Date Cancellations', content=f'{amount_cancelled}',bar_value=2, key ='month_cancellation', sentiment='bad',title_text_size='small', content_text_size = 'medium')
@@ -794,7 +794,7 @@ if uploaded_file is not None:
                 hc.info_card(title='Week To Date Receipted', content=f'{fom_week_receipts}', key='week_receipt', bar_value=12, sentiment='good', content_text_size='medium',title_text_size='small')
     
             with cc_row1[2]:
-                hc.info_card(title='Week To Date On Credit', content=f'{week_final_share} %', key='week_credit', sentiment='neutral',bar_value=55, content_text_size='medium', title_text_size='small')
+                hc.info_card(title='Week To Date Share of GWP', content=f'{week_final_share} %', key='week_credit', sentiment='neutral',bar_value=55, content_text_size='medium', title_text_size='small')
     
             with cc_row1[3]:
                 hc.info_card(title='Week To Date Cancellations', content=f'{week_total_cancelled}', key='week_cancelled', sentiment='bad',bar_value=55, content_text_size='medium',title_text_size='small')
@@ -811,7 +811,7 @@ if uploaded_file is not None:
                 hc.info_card(title='Yesterday Receipted', content= f'{fom_day_receipts}',bar_value=12, key='day_receipts', sentiment='good',  content_text_size='medium', title_text_size='small')
     
             with cc_row2[2]:
-                hc.info_card(title='Yesterday On Credit', content=f'{yesterday_final_share} %', key='day_credit', sentiment='neutral', bar_value=55, content_text_size='medium', title_text_size='small')
+                hc.info_card(title='Yesterday Share of GWP', content=f'{yesterday_final_share} %', key='day_credit', sentiment='neutral', bar_value=55, content_text_size='medium', title_text_size='small')
     
             with cc_row2[3]:
                 hc.info_card(title='Yesterday Cancellations', content=f'{amount_daily_cancelled}',bar_value=2, key='cancelled', sentiment='bad',title_text_size='small', content_text_size = 'medium')
