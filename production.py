@@ -104,39 +104,21 @@ if uploaded_file is not None:
 
     # MOST RECENT (YESTERDAY)
     most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
-    
-    # Initialize a variable to store the total premium
-    yesterday = 0
-    
-    # Check if there are any rows for the most recent date
-    if not most_recent_date.empty:
-        # If the most recent date is not a Saturday (5) or Sunday (6)
-        if most_recent_date['TRANSACTION DATE'].iloc[0].weekday() not in [5, 6]:
-            yesterday = most_recent_date['GROSS PREMIUM'].sum()
-        else:
-            # Adjust the dates for Saturday and Sunday
-            most_recent_date['ADJUSTED DATE'] = most_recent_date['TRANSACTION DATE'].apply(
-                lambda x: x - timedelta(days=1) if x.weekday() == 5 else x - timedelta(days=2)
-            )
-            
-            # Sum the gross premium for the adjusted dates
-            yesterday = most_recent_date[most_recent_date['TRANSACTION DATE'].isin(most_recent_date['ADJUSTED DATE'])]['GROSS PREMIUM'].sum()
 
-
-    # # MOST RECENT  (YESTERDAY)
-    # most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
-
-    # if most_recent_date['TRANSACTION DATE'].iloc[0].weekday() not in [5, 6]:
-    #     yesterday = most_recent_date['GROSS PREMIUM'].sum()
-    # else:
-    #     # Adjust the dates for Saturday and Sunday
-    #     most_recent_date['ADJUSTED DATE'] = most_recent_date['TRANSACTION DATE'].apply(
-    #         lambda x: x - timedelta(days=1) if x.weekday() == 5 else x - timedelta(days=2)
-    #     )
-        
-    #     # Sum the gross premium for the adjusted dates
-    #     yesterday = most_recent_date[most_recent_date['TRANSACTION DATE'].isin(most_recent_date['ADJUSTED DATE'])]['GROSS PREMIUM'].sum()   
+    if most_recent_date.iloc[0].weekday() == 4:
+        friday = most_recent_date['GROSS PREMIUM'].sum()
+        yesterday = friday
+    elif most_recent_date.iloc[0].weekday() == 5:
+        saturday = most_recent_date['GROSS PREMIUM'].sum()
+        yesterday = (friday + saturday)
+    elif most_recent_date.iloc[0].weekday() == 6:
+        sunday = most_recent_date['GROSS PREMIUM'].sum()
+         yesterday = (friday + saturday + sunday)
+    else:
+        yesterday = most_recent_date['GROSS PREMIUM'].sum()
     
+    
+  
     # yesterday_premium = most_recent_date['GROSS PREMIUM'].sum()
     fom_yesterday_premium = "Ksh. {:,.0f}".format(yesterday)
     yesterday_receipts = most_recent_date[most_recent_date['RECEIPTS'] > 0]
