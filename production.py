@@ -103,24 +103,24 @@ if uploaded_file is not None:
     nbp = "{:,.0f}".format(new_business_percent)
 
     # MOST RECENT (YESTERDAY)
-    most_recent_dates = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
+    most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
     
     # Initialize a variable to store the total premium
     yesterday = 0
     
     # Check if there are any rows for the most recent date
-    if not most_recent_dates.empty:
+    if not most_recent_date.empty:
         # If the most recent date is not a Saturday (5) or Sunday (6)
-        if most_recent_dates['TRANSACTION DATE'].iloc[0].weekday() not in [5, 6]:
-            yesterday = most_recent_dates['GROSS PREMIUM'].sum()
+        if most_recent_date['TRANSACTION DATE'].iloc[0].weekday() not in [5, 6]:
+            yesterday = most_recent_date['GROSS PREMIUM'].sum()
         else:
             # Adjust the dates for Saturday and Sunday
-            most_recent_dates['ADJUSTED DATE'] = most_recent_dates['TRANSACTION DATE'].apply(
+            most_recent_date['ADJUSTED DATE'] = most_recent_date['TRANSACTION DATE'].apply(
                 lambda x: x - timedelta(days=1) if x.weekday() == 5 else x - timedelta(days=2)
             )
             
             # Sum the gross premium for the adjusted dates
-            yesterday = most_recent_dates[most_recent_dates['TRANSACTION DATE'].isin(most_recent_dates['ADJUSTED DATE'])]['GROSS PREMIUM'].sum()
+            yesterday = most_recent_date[most_recent_date['TRANSACTION DATE'].isin(most_recent_date['ADJUSTED DATE'])]['GROSS PREMIUM'].sum()
 
 
     # # MOST RECENT  (YESTERDAY)
