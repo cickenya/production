@@ -105,9 +105,6 @@ if uploaded_file is not None:
     # MOST RECENT  (YESTERDAY)
     most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
 
-    # Initialize a variable to store the total premium
-    yesterday = 0
-
     if most_recent_date['TRANSACTION DATE'].iloc[0].weekday() not in [5, 6]:
         yesterday = most_recent_date['GROSS PREMIUM'].sum()
     else:
