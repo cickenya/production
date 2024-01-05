@@ -131,19 +131,37 @@ if uploaded_file is not None:
 
     friday_df = this_week[this_week['DayOfWeek'] == 'Friday']
     friday = friday_df['GROSS PREMIUM'].sum()
-    friday_cancelled = friday_df[friday_df['GROSS PREMIUM']<0].sum()
-    friday_receipts = friday_df[friday_df['RECEIPTS']>0].sum()
-    friday_credits = friday_df[friday_df['NET BALANCE'].sum()    
+    friday_cancelled = friday_df[friday_df['GROSS PREMIUM'] < 0].sum()
+    friday_receipts = friday_df[friday_df['RECEIPTS'] > 0].sum()
+    friday_credits = friday_df['NET BALANCE'].sum()  # Corrected syntax
+    
     saturday_df = this_week[this_week['DayOfWeek'] == 'Saturday']
     saturday = saturday_df['GROSS PREMIUM'].sum()
-    saturday_receipts = saturday_df[saturday_df['RECEIPTS']>0].sum()
-    saturday_credits = saturday_df[saturday_df['NET BALANCE'].sum()
-    saturday_cancelled = saturday_df[saturday_df['GROSS PREMIUM']<0].sum()    
+    saturday_receipts = saturday_df[saturday_df['RECEIPTS'] > 0].sum()
+    saturday_credits = saturday_df['NET BALANCE'].sum()  # Corrected syntax
+    saturday_cancelled = saturday_df[saturday_df['GROSS PREMIUM'] < 0].sum()
+    
     sunday_df = this_week[this_week['DayOfWeek'] == 'Sunday']
     sunday = sunday_df['GROSS PREMIUM'].sum()
-    sunday_receipts = sunday_df[sunday_df['RECEIPTS']>0].sum()
-    sunday_credits = sunday_df[sunday_df['NET BALANCE'].sum()
-    sunday_cancelled = sunday_df[sunay_df['GROSS PREMIUM']<0].sum()
+    sunday_receipts = sunday_df[sunday_df['RECEIPTS'] > 0].sum()
+    sunday_credits = sunday_df['NET BALANCE'].sum()  # Corrected syntax
+    sunday_cancelled = sunday_df[sunday_df['GROSS PREMIUM'] < 0].sum()
+
+    # friday_df = this_week[this_week['DayOfWeek'] == 'Friday']
+    # friday = friday_df['GROSS PREMIUM'].sum()
+    # friday_cancelled = friday_df[friday_df['GROSS PREMIUM']<0].sum()
+    # friday_receipts = friday_df[friday_df['RECEIPTS']>0].sum()
+    # friday_credits = friday_df[friday_df['NET BALANCE'].sum()    
+    # saturday_df = this_week[this_week['DayOfWeek'] == 'Saturday']
+    # saturday = saturday_df['GROSS PREMIUM'].sum()
+    # saturday_receipts = saturday_df[saturday_df['RECEIPTS']>0].sum()
+    # saturday_credits = saturday_df[saturday_df['NET BALANCE'].sum()
+    # saturday_cancelled = saturday_df[saturday_df['GROSS PREMIUM']<0].sum()    
+    # sunday_df = this_week[this_week['DayOfWeek'] == 'Sunday']
+    # sunday = sunday_df['GROSS PREMIUM'].sum()
+    # sunday_receipts = sunday_df[sunday_df['RECEIPTS']>0].sum()
+    # sunday_credits = sunday_df[sunday_df['NET BALANCE'].sum()
+    # sunday_cancelled = sunday_df[sunay_df['GROSS PREMIUM']<0].sum()
     
     if first_recent_date.iloc[0].weekday() == 4:
         yesterday = friday
