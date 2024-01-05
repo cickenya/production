@@ -107,6 +107,11 @@ if uploaded_file is not None:
 
     first_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()].iloc[0]
 
+    friday = 0
+    saturday = 0
+    sunday = 0
+
+
     if first_recent_date.iloc[0].weekday() == 4:
         friday = most_recent_date['GROSS PREMIUM'].sum()
         yesterday = friday
