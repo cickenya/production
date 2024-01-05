@@ -109,7 +109,7 @@ if uploaded_file is not None:
     yesterday = 0
     
     # Iterate through each most recent date
-    for index, row in most_recent_dates.iterrows():
+    for index, row in most_recent_date.iterrows():
         date_to_adjust = row['TRANSACTION DATE']
     
         # Check if the date to adjust is a Saturday (5) or Sunday (6)
