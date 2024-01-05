@@ -646,6 +646,8 @@ if uploaded_file is not None:
         
         month_premium = filtered_df['GROSS PREMIUM'].sum()
         fom_month_premium = "Ksh. {:,.0f}".format(month_premium)
+        month_share = ((month_premium)/(month_gp) * 100)
+        month_final_share = "{:,.0f}".format(month_share)
         month_receipts = filtered_df['RECEIPTS'].sum()
         fom_month_receipts = "Ksh. {:,.0f}".format(month_receipts)
         month_credit = filtered_df['NET BALANCE'].sum()
@@ -684,25 +686,25 @@ if uploaded_file is not None:
     
        
         if first_recent_date.iloc[0].weekday() == 4:
-            yesterday = friday
+            tm_yesterday = friday
             yesterday_receipts_total = friday_receipts
             yesterday_credit_total = friday_credits
             cancelled_yesterday = friday_cancelled
             
         elif first_recent_date.iloc[0].weekday() == 5:
-            yesterday = (friday + saturday)
+            tm_yesterday = (friday + saturday)
             yesterday_receipts_total = friday_receipts + saturday_receipts
             yesterday_credit_total = (friday_credits + saturday_credits)
             cancelled_yesterday = friday_cancelled + saturday_cancelled
             
         elif first_recent_date.iloc[0].weekday() == 6:
-            yesterday = (friday + saturday+ sunday)
+            tm_yesterday = (friday + saturday+ sunday)
             yesterday_receipts_total = sunday_receipts
             yesterday_credit_total = (friday_credits + saturday_credits + sunday_credits)
             cancelled_yesterday = friday_cancelled + saturday_cancelled + sunday_cancelled
             
         else:
-            yesterday = most_recent['GROSS PREMIUM'].sum()
+            tm_yesterday = most_recent['GROSS PREMIUM'].sum()
             yesterday_receipts = most_recent[most_recent['RECEIPTS'] > 0].sum()
             yesterday_credit_total = most_recent[most_recent['NET BALANCE']>0].sum()
             cancelled_yesterday = most_recent[most_recent['GROSS PREMIUM'] < 0].sum()
@@ -710,7 +712,9 @@ if uploaded_file is not None:
 
         
       
-        fom_day_premium = "Ksh. {:,.0f}".format(yesterday)       
+        fom_day_premium = "Ksh. {:,.0f}".format(tm_yesterday)     
+        yesterday_share = ((tm_yesterday)/(yesterday) * 100)
+        yesterday_final_share = "{:,.0f}".format(yesterday_share)
         fom_day_receipts = "Ksh. {:,.0f}".format(yesterday_receipts_total)        
         fom_day_credit = "Ksh. {:,.0f}".format(yesterday_credit_total)
         amount_daily_cancelled = "Ksh. {:,.0f}".format(cancelled_yesterday)
@@ -737,6 +741,8 @@ if uploaded_file is not None:
             
         week_premium = filtered_data['GROSS PREMIUM'].sum()
         fom_week_premium = "Ksh. {:,.0f}".format(week_premium)
+        week_share = ((week_premium)/(week_gp)*100)
+        week_final_share = "{:,.0f}".format(week_share)
         week_receipts = filtered_data[filtered_data['RECEIPTS'] > 0]
         week_receipts_total = week_receipts['RECEIPTS'].sum()
         fom_week_receipts = "Ksh. {:,.0f}".format(week_receipts_total)
@@ -773,7 +779,7 @@ if uploaded_file is not None:
                 hc.info_card(title='Month To Date Receipted', content=f'{fom_month_receipts}',bar_value=12,  title_text_size='small', sentiment='good', content_text_size='medium')
     
             with cc[2]:
-                hc.info_card(title='Month To Date On Credit', content=f'{fom_month_credit}', sentiment='neutral',  title_text_size='small', bar_value=55, content_text_size='medium')
+                hc.info_card(title='Month To Date On Credit', content=f'{month_final_share} %', sentiment='neutral',  title_text_size='small', bar_value=55, content_text_size='medium')
     
             with cc[3]:
                 hc.info_card(title='Month To Date Cancellations', content=f'{amount_cancelled}',bar_value=2, key ='month_cancellation', sentiment='bad',title_text_size='small', content_text_size = 'medium')
@@ -788,7 +794,7 @@ if uploaded_file is not None:
                 hc.info_card(title='Week To Date Receipted', content=f'{fom_week_receipts}', key='week_receipt', bar_value=12, sentiment='good', content_text_size='medium',title_text_size='small')
     
             with cc_row1[2]:
-                hc.info_card(title='Week To Date On Credit', content=f'{fom_week_credit}', key='week_credit', sentiment='neutral',bar_value=55, content_text_size='medium', title_text_size='small')
+                hc.info_card(title='Week To Date On Credit', content=f'{week_final_share} %', key='week_credit', sentiment='neutral',bar_value=55, content_text_size='medium', title_text_size='small')
     
             with cc_row1[3]:
                 hc.info_card(title='Week To Date Cancellations', content=f'{week_total_cancelled}', key='week_cancelled', sentiment='bad',bar_value=55, content_text_size='medium',title_text_size='small')
@@ -805,7 +811,7 @@ if uploaded_file is not None:
                 hc.info_card(title='Yesterday Receipted', content= f'{fom_day_receipts}',bar_value=12, key='day_receipts', sentiment='good',  content_text_size='medium', title_text_size='small')
     
             with cc_row2[2]:
-                hc.info_card(title='Yesterday On Credit', content=f'{fom_day_credit}', key='day_credit', sentiment='neutral', bar_value=55, content_text_size='medium', title_text_size='small')
+                hc.info_card(title='Yesterday On Credit', content=f'{yesterday_final_share} %', key='day_credit', sentiment='neutral', bar_value=55, content_text_size='medium', title_text_size='small')
     
             with cc_row2[3]:
                 hc.info_card(title='Yesterday Cancellations', content=f'{amount_daily_cancelled}',bar_value=2, key='cancelled', sentiment='bad',title_text_size='small', content_text_size = 'medium')
