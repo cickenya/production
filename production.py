@@ -116,11 +116,11 @@ if uploaded_file is not None:
     
 
 
-    if first_recent_date.iloc[0].weekday() == 4:
+    if most_recent_date.iloc[0].weekday() == 4:
         yesterday = friday
-    elif first_recent_date.iloc[0].weekday() == 5:
+    elif most_recent_date.iloc[0].weekday() == 5:
         yesterday = (friday + saturday)
-    elif first_recent_date.iloc[0].weekday() == 6:
+    elif most_recent_date.iloc[0].weekday() == 6:
         yesterday = (friday + saturday+ sunday)
     else:
         yesterday = most_recent_date['GROSS PREMIUM'].sum()
