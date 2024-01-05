@@ -107,18 +107,21 @@ if uploaded_file is not None:
 
     # Initialize a variable to store the total premium
     yesterday = 0
-    
-    # Iterate through each most recent date
-    for index, row in most_recent_date.iterrows():
-        date_to_adjust = row['TRANSACTION DATE']
-    
-        # Check if the date to adjust is a Saturday (5) or Sunday (6)
-        if date_to_adjust.weekday() == 5:  # Saturday
-            date_to_adjust -= timedelta(days=1)
-        elif date_to_adjust.weekday() == 6:  # Sunday
-            date_to_adjust -= timedelta(days=2)
 
-        yesterday += most_recent_date[most_recent_date['TRANSACTION DATE'] == date_to_adjust]['GROSS PREMIUM'].sum()
+    if most_recent_date['TRANSACTION DATE'].iloc[0].weekday() not in [5, 6]:
+        yesterday = most_recent_date['GROSS PREMIUM'].sum()
+    else:
+        # Iterate through each most recent date
+        for index, row in most_recent_date.iterrows():
+            date_to_adjust = row['TRANSACTION DATE']
+        
+            # Check if the date to adjust is a Saturday (5) or Sunday (6)
+            if date_to_adjust.weekday() == 5:  # Saturday
+                date_to_adjust -= timedelta(days=1)
+            elif date_to_adjust.weekday() == 6:  # Sunday
+                date_to_adjust -= timedelta(days=2)
+    
+            yesterday += most_recent_date[most_recent_date['TRANSACTION DATE'] == date_to_adjust]['GROSS PREMIUM'].sum()
 
     
     # yesterday_premium = most_recent_date['GROSS PREMIUM'].sum()
