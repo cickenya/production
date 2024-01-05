@@ -632,10 +632,15 @@ if uploaded_file is not None:
         selected_manager =st.sidebar.selectbox("Choose TM", unique)
 
         for_cancellation =  cancellations[(cancellations['NEW TM'] == selected_manager) & (cancellations['MONTH NAME'] == current_month_name)]
-      
+        
+        newdf['LATEST MONTH'] = new df['TRANSACTION DATE'].dt.to_period('M')
+
+        # Find the most recent month
+        most_recent_month = newdf['LATEST MONTH'].max()
+
 
         # Filter the DataFrame based on the selected branch
-        filtered_df = newdf[(newdf['NEW TM'] == selected_manager)]
+        filtered_df = newdf[(newdf['NEW TM'] == selected_manager) & (newdf['LATEST MONTH'] == most_recent_month)]
         filtered_target = target[(target['NEW TM'] == selected_manager) & (target['MONTH'] == current_month_name)]
         total = int(filtered_target['TOTAL'].sum())
         target_total = "{:,.0f}".format(total)
