@@ -711,8 +711,8 @@ if uploaded_file is not None:
         
       
         fom_day_premium = "Ksh. {:,.0f}".format(yesterday)       
-        fom_day_receipts = "Ksh. {:,.0f}".format(yesterday_receipts)        
-        fom_day_credit = "Ksh. {:,.0f}".format(yesterday_credit)
+        fom_day_receipts = "Ksh. {:,.0f}".format(yesterday_receipts_total)        
+        fom_day_credit = "Ksh. {:,.0f}".format(yesterday_credit_total)
         amount_daily_cancelled = "Ksh. {:,.0f}".format(cancelled_yesterday)
                
 
