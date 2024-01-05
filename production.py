@@ -660,34 +660,65 @@ if uploaded_file is not None:
 
         most_current_date = newdf['TRANSACTION DATE'].max()
         current_date = pd.to_datetime(most_current_date)
-
-        # Check if the most current date is a Saturday (5) or Sunday (6)
-       
-        if current_date.weekday() == 5:  # Saturday
-            current_date -= timedelta(days= 1)
-        elif current_date.weekday() == 6:  # Sunday
-            current_date -= timedelta(days= 2)
-
-
         most_recent = filtered_df[filtered_df['TRANSACTION DATE'] == current_date]
         
-        daily_cancellation =  cancellations[(cancellations['NEW TM'] == selected_manager) & (cancellations['TRANSACTION DATE'] == most_current_date)]
+        # daily_cancellation =  cancellations[(cancellations['NEW TM'] == selected_manager) & (cancellations['TRANSACTION DATE'] == most_current_date)]
 
-        day_premium = most_recent['GROSS PREMIUM'].sum()
-        fom_day_premium = "Ksh. {:,.0f}".format(day_premium)
-        day_receipts = most_recent[most_recent['RECEIPTS'] > 0]
-        day_receipts_total = day_receipts['RECEIPTS'].sum()
-        fom_day_receipts = "Ksh. {:,.0f}".format(day_receipts_total)
-        day_credit = most_recent[most_recent['NET BALANCE'] > 0]
-        day_credit_total = day_credit['NET BALANCE'].sum()
-        fom_day_credit = "Ksh. {:,.0f}".format(day_credit_total)
+        friday_df = this_week[(this_week['DayOfWeek'] == 'Friday') & (this_week['NEW TM'] == selected_manager) ]
+        friday = friday_df['GROSS PREMIUM'].sum()
+        friday_cancelled = friday_df[friday_df['GROSS PREMIUM'] < 0]['GROSS PREMIUM'].sum()
+        friday_receipts = friday_df[friday_df['RECEIPTS'] > 0]['RECEIPTS'].sum()
+        friday_credits = friday_df['NET BALANCE'].sum()
+        
+        saturday_df = this_week[(this_week['DayOfWeek'] == 'Saturday') & (this_week['NEW TM'] == selected_manager)]
+        saturday = saturday_df['GROSS PREMIUM'].sum()
+        saturday_receipts = saturday_df[saturday_df['RECEIPTS'] > 0]['RECEIPTS'].sum()
+        saturday_credits = saturday_df['NET BALANCE'].sum()
+        saturday_cancelled = saturday_df[saturday_df['GROSS PREMIUM'] < 0]['GROSS PREMIUM'].sum()
+        
+        sunday_df = this_week[(this_week['DayOfWeek'] == 'Sunday') & (this_week['NEW TM'] == selected_manager)]
+        sunday = sunday_df['GROSS PREMIUM'].sum()
+        sunday_receipts = sunday_df[sunday_df['RECEIPTS'] > 0]['RECEIPTS'].sum()
+        sunday_credits = sunday_df['NET BALANCE'].sum()
+        sunday_cancelled = sunday_df[sunday_df['GROSS PREMIUM'] < 0]['GROSS PREMIUM'].sum()
+    
+       
+        if first_recent_date.iloc[0].weekday() == 4:
+            yesterday = friday
+            yesterday_receipts_total = friday_receipts
+            yesterday_credit_total = friday_credits
+            cancelled_yesterday = friday_cancelled
+            
+        elif first_recent_date.iloc[0].weekday() == 5:
+            yesterday = (friday + saturday)
+            yesterday_receipts_total = friday_receipts + saturday_receipts
+            yesterday_credit_total = (friday_credits + saturday_credits)
+            cancelled_yesterday = friday_cancelled + saturday_cancelled
+            
+        elif first_recent_date.iloc[0].weekday() == 6:
+            yesterday = (friday + saturday+ sunday)
+            yesterday_receipts_total = sunday_receipts
+            yesterday_credit_total = (friday_credits + saturday_credits + sunday_credits)
+            cancelled_yesterday = friday_cancelled + saturday_cancelled + sunday_cancelled
+            
+        else:
+            yesterday = most_recent['GROSS PREMIUM'].sum()
+            yesterday_receipts = most_recent[most_recent['RECEIPTS'] > 0].sum()
+            yesterday_credit_total = most_recent[most_recent['NET BALANCE']>0].sum()
+            cancelled_yesterday = most_recent[most_recent['GROSS PREMIUM'] < 0].sum()
+           
+
+        
+      
+        fom_day_premium = "Ksh. {:,.0f}".format(yesterday)       
+        fom_day_receipts = "Ksh. {:,.0f}".format(yesterday_receipts)        
+        fom_day_credit = "Ksh. {:,.0f}".format(yesterday_credit)
+        amount_daily_cancelled = "Ksh. {:,.0f}".format(cancelled_yesterday)
                
 
         monthly_cancelled = for_cancellation['GROSS PREMIUM'].sum()
-        amount_cancelled = "Ksh. {:,.0f}".format(monthly_cancelled)
-
-        daily_cancelled = daily_cancellation['GROSS PREMIUM'].sum()
-        amount_daily_cancelled = "Ksh. {:,.0f}".format(daily_cancelled)
+        amount_cancelled = "Ksh. {:,.0f}".format(monthly_cancelled)      
+        
 
         filtered_df['TRANSACTION DATE'] = pd.to_datetime(filtered_df['TRANSACTION DATE'])
 
