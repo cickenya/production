@@ -107,22 +107,23 @@ if uploaded_file is not None:
 
     first_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()].iloc[0]
 
-    friday = 0
-    saturday = 0
-    sunday = 0
+    friday_df = most_recent_day[most_recent_date['DayOfWeek'] == 'Friday']
+    friday = friday_df['GROSS PREMIUM'].sum()
+    saturday_df = most_recent_day[most_recent_date['DayOfWeek'] == 'Saturday']
+    saturday = saturday_df['GROSS PREMIUM'].sum()
+    sunday_df = most_recent_day[most_recent_date['DayOfWeek'] == 'Sundday']
+    sunday = sunday_df['GROSS PREMIUM'].sum()
+    
 
 
     if first_recent_date.iloc[0].weekday() == 4:
-        friday = most_recent_date['GROSS PREMIUM'].sum()
         yesterday = friday
     elif first_recent_date.iloc[0].weekday() == 5:
-        saturday = most_recent_date['GROSS PREMIUM'].sum()
         yesterday = (friday + saturday)
     elif first_recent_date.iloc[0].weekday() == 6:
-        sunday = first_recent_date['GROSS PREMIUM'].sum()
         yesterday = (friday + saturday+ sunday)
     else:
-        yesterday = first_recent_date['GROSS PREMIUM'].sum()
+        yesterday = most_recent_date['GROSS PREMIUM'].sum()
 
   
     # yesterday_premium = most_recent_date['GROSS PREMIUM'].sum()
