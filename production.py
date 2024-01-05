@@ -118,7 +118,7 @@ if uploaded_file is not None:
         elif date_to_adjust.weekday() == 6:  # Sunday
             date_to_adjust -= timedelta(days=2)
 
-        yesterday_premium = yesterday += most_recent_date[most_recent_date['TRANSACTION DATE'] == date_to_adjust]['GROSS PREMIUM'].sum()
+        yesterday_premium = yesterday + most_recent_date[most_recent_date['TRANSACTION DATE'] == date_to_adjust]['GROSS PREMIUM'].sum()
 
     
     # yesterday_premium = most_recent_date['GROSS PREMIUM'].sum()
