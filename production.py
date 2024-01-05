@@ -131,31 +131,50 @@ if uploaded_file is not None:
 
     friday_df = this_week[this_week['DayOfWeek'] == 'Friday']
     friday = friday_df['GROSS PREMIUM'].sum()
+    friday_receipts = friday_df[friday_df['RECEIPTS']>0].sum()
+    friday_credits = friday_df[friday_df['NET BALANCE'].sum()
+    friday_cancelled = friday_df[friday_df['GROSS PREMIUM']<0].sum()
+    
     saturday_df = this_week[this_week['DayOfWeek'] == 'Saturday']
     saturday = saturday_df['GROSS PREMIUM'].sum()
+    saturday_receipts = saturday_df[saturday_df['RECEIPTS']>0].sum()
+    saturday_credits = saturday_df[saturday_df['NET BALANCE'].sum()
+    saturday_cancelled = saturday_df[saturday_df['GROSS PREMIUM']<0].sum()
+    
     sunday_df = this_week[this_week['DayOfWeek'] == 'Sunday']
     sunday = sunday_df['GROSS PREMIUM'].sum()
+    sunday_receipts = sunday_df[sunday_df['RECEIPTS']>0].sum()
+    sunday_credits = sunday_df[sunday_df['NET BALANCE'].sum()
+    sunday_cancelled = sunday_df[sunay_df['GROSS PREMIUM']<0].sum()
     
     if first_recent_date.iloc[0].weekday() == 4:
         yesterday = friday
+        yesterday_receipts_total = friday_receipts
+        yesterday_credit_total = friday_credits
+        cancelled_yesterday = friday_cancelled
+        
     elif first_recent_date.iloc[0].weekday() == 5:
         yesterday = (friday + saturday)
+        yesterday_receipts_total = friday_receipts + saturday_receipts
+        yesterday_credit_total = (friday_credits + saturday_credits)
+        cancelled_yesterday = friday_cancelled + saturday_cancelled
+        
     elif first_recent_date.iloc[0].weekday() == 6:
         yesterday = (friday + saturday+ sunday)
+        yesterday_receipts_total = sunday_receipts
+        yesterday_credit_total = (friday_credits + saturday_credits + sunday_credits)
+        cancelled_yesterday = friday_cancelled + saturday_cancelled + sunday_cancelled
+        
     else:
         yesterday = most_recent_date['GROSS PREMIUM'].sum()
+        yesterday_receipts = most_recent_date[most_recent_date['RECEIPTS'] > 0].sum()
+        yesterday_credit_total = most_recent_date[most_recent_date['NET BALANCE']>0].sum()
+        cancelled_yesterday = most_recent_date[most_recent_date['GROSS PREMIUM'] < 0].sum()
+       
 
-  
-    # yesterday_premium = most_recent_date['GROSS PREMIUM'].sum()
-    fom_yesterday_premium = "Ksh. {:,.0f}".format(yesterday)
-    yesterday_receipts = most_recent_date[most_recent_date['RECEIPTS'] > 0]
-    yesterday_receipts_total = yesterday_receipts['RECEIPTS'].sum()
-    fom_yesterday_receipts = "Ksh. {:,.0f}".format(yesterday_receipts_total)
-    yesterday_credit = most_recent_date[most_recent_date['NET BALANCE'] > 0]
-    yesterday_credit_total = yesterday_credit['NET BALANCE'].sum()
-    fom_yesterday_credit = "Ksh. {:,.0f}".format(yesterday_credit_total)
-    cancelled_yesterday_df = most_recent_date[most_recent_date['GROSS PREMIUM'] < 0]
-    cancelled_yesterday = cancelled_yesterday_df['GROSS PREMIUM'].sum()
+    fom_yesterday_premium = "Ksh. {:,.0f}".format(yesterday)    
+    fom_yesterday_receipts = "Ksh. {:,.0f}".format(yesterday_receipts_total)    
+    fom_yesterday_credit = "Ksh. {:,.0f}".format(yesterday_credit_total)  
     amount_yesterday_cancelled = "Ksh. {:,.0f}".format(cancelled_yesterday)
 
     # THIS MONTH
