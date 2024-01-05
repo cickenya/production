@@ -104,6 +104,12 @@ if uploaded_file is not None:
 
     # MOST RECENT  (YESTERDAY)
     most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
+
+    # Check if the most current date is a Saturday (5) or Sunday (6)
+    if most_recent_date.weekday() == 5:  # Saturday
+        most_recent_date -= timedelta(days=1)
+    elif most_recent_date.weekday() == 6:  # Sunday
+        most_recent_date -= timedelta(days=2)
     
     yesterday_premium = most_recent_date['GROSS PREMIUM'].sum()
     fom_yesterday_premium = "Ksh. {:,.0f}".format(yesterday_premium)
@@ -626,6 +632,7 @@ if uploaded_file is not None:
             current_date -= timedelta(days= 1)
         elif current_date.weekday() == 6:  # Sunday
             current_date -= timedelta(days= 2)
+
 
         most_recent = filtered_df[filtered_df['TRANSACTION DATE'] == current_date]
         
