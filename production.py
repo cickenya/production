@@ -633,7 +633,7 @@ if uploaded_file is not None:
 
         for_cancellation =  cancellations[(cancellations['NEW TM'] == selected_manager) & (cancellations['MONTH NAME'] == current_month_name)]
         
-        newdf['LATEST MONTH'] = new df['TRANSACTION DATE'].dt.to_period('M')
+        newdf['LATEST MONTH'] = newdf['TRANSACTION DATE'].dt.to_period('M')
 
         # Find the most recent month
         most_recent_month = newdf['LATEST MONTH'].max()
