@@ -105,19 +105,20 @@ if uploaded_file is not None:
     # MOST RECENT (YESTERDAY)
     most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
 
-    if most_recent_date.iloc[0].weekday() == 4:
+    first_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()].iloc[0]
+
+    if first_recent_date.iloc[0].weekday() == 4:
         friday = most_recent_date['GROSS PREMIUM'].sum()
         yesterday = friday
-    elif most_recent_date.iloc[0].weekday() == 5:
+    elif first_recent_date.iloc[0].weekday() == 5:
         saturday = most_recent_date['GROSS PREMIUM'].sum()
         yesterday = (friday + saturday)
-    elif most_recent_date.iloc[0].weekday() == 6:
-         sunday = most_recent_date['GROSS PREMIUM'].sum()
-         yesterday = (friday + saturday + sunday)
+    elif first_recent_date.iloc[0].weekday() == 6:
+        sunday = first_recent_date['GROSS PREMIUM'].sum()
+        yesterday = (friday + saturday+ sunday)
     else:
-        yesterday = most_recent_date['GROSS PREMIUM'].sum()
-    
-    
+        yesterday = first_recent_date['GROSS PREMIUM'].sum()
+
   
     # yesterday_premium = most_recent_date['GROSS PREMIUM'].sum()
     fom_yesterday_premium = "Ksh. {:,.0f}".format(yesterday)
