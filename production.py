@@ -519,7 +519,7 @@ if uploaded_file is not None:
                                     y= yesterday["GROSS PREMIUM"]        
                                     ))
                     
-                            fig.update_layout(title={'text': 'YESTERDAY ACCOUNT MANAGERS PRODUCTION SUMMARY', 'x': 0.5, 'xanchor': 'center'}, width=975) 
+                            fig.update_layout(title={'text': 'YESTERDAY ACCOUNT MANAGERS PRODUCTION SUMMARY', 'x': 0.5, 'xanchor': 'center'}, tickfont=dict(size=10), width=975) 
                 
                             st.plotly_chart(fig)
                 
