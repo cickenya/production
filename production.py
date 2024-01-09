@@ -237,6 +237,13 @@ if uploaded_file is not None:
             total_mix_result = "{:,.0f}".format(totalmix)
             mix = (motorproduce/ totalmix)*100
             mix_result = "{:.0f}".format(mix)
+
+            data = worksheet_3.get_all_values()
+    
+            # Prepare data for Plotly
+            headers = data[0]
+            data = data[1:]
+            lastyear = pd.DataFrame(data, columns=headers)
             
             
             bar = newdf.groupby('MONTH NAME')['GROSS PREMIUM'].sum().reset_index()
@@ -292,11 +299,23 @@ if uploaded_file is not None:
                 
                 
                         fig2 = go.Figure()
-                
+
                         fig2.add_trace(go.Bar(
-                                width= 0.5,
+                                width= 0.425,
                                 x= bar['MONTH NAME'],
-                                y= bar['GROSS PREMIUM'],       
+                                y= bar['GROSS PREMIUM'],   
+                                name = '2024',
+                                marker_color="#00A550"
+                                   
+                                ))               
+                        
+                        
+                        fig2.add_trace(go.Bar(
+                                width= 0.425,
+                                x= lastyear['MONTH NAME'],
+                                y= lastyear['GROSS PREMIUM'], 
+                                name = '2023',                                
+                                marker_color="#FFA836"   
                                 ))
                         
                 
