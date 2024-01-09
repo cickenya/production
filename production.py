@@ -169,6 +169,7 @@ if uploaded_file is not None:
         cancelled_yesterday = friday_cancelled + saturday_cancelled + sunday_cancelled
         
     else:
+        yesterday_receipts = most_recent_date.copy()
         yesterday = most_recent_date['GROSS PREMIUM'].sum()
         yesterday_receipts = most_recent_date[most_recent_date['RECEIPTS'] > 0].sum().copy()
         yesterday_credit_total = most_recent_date[most_recent_date['NET BALANCE']>0].sum()
