@@ -321,7 +321,7 @@ if uploaded_file is not None:
                                 ))
                         
                 
-                        fig2.update_layout(title={'text': 'MONTHLY AGGREGATE PRODUCTION', 'x': 0.5, 'xanchor': 'center'}, width=975, xaxis=dict(categoryorder='array', categoryarray=["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"], tickfont=dict(size=10))) 
+                        fig2.update_layout(title={'text': '2023-2024 AGGREGATE GWP COMPARISON', 'x': 0.5, 'xanchor': 'center'}, width=975, xaxis=dict(categoryorder='array', categoryarray=["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"], tickfont=dict(size=10))) 
                 
                         
                         st.plotly_chart(fig2)
