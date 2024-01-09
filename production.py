@@ -472,7 +472,7 @@ if uploaded_file is not None:
                                 y= week_bar["GROSS PREMIUM"]        
                                 ))
                 
-                        fig.update_layout(title={'text': 'MONTH TO DATE BRANCH PERFORMANCE', 'x': 0.5, 'xanchor': 'center'}, width=450) 
+                        fig.update_layout(title={'text': 'WEEK TO DATE BRANCH PERFORMANCE', 'x': 0.5, 'xanchor': 'center'}, width=450) 
                 
 
                         fig2 = go.Figure()
