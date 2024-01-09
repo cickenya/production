@@ -26,6 +26,7 @@ url = "https://docs.google.com/spreadsheets/d/1yQXPZ4zdI8aiIzYXzzuAwDS1V_Zg0fWU6
 # Open the Google Sheets spreadsheet
 worksheet_1 = gc.open_by_url(url).worksheet("accounts")
 worksheet_2 = gc.open_by_url(url).worksheet("targets")
+worksheet_3 = gc.open_by_url(url).worksheet("lastyear")
 
 #can apply customisation to almost all the properties of the card, including the progress bar
 theme_bad = {'bgcolor': '#FFF0F0','title_color': 'red','content_color': 'red','icon_color': 'red', 'icon': 'fa fa-times-circle'}
