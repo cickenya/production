@@ -95,7 +95,7 @@ if uploaded_file is not None:
     
     jointdf = pd.merge(df2, lastdf, on='INTERMEDIARY', how='left')
     jointdf.loc[jointdf['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
-    jointdf = jointdf[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "NEW TM", "MONTH NAME", "DayOfWeek"]]
+    jointdf = jointdf[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
     
     newdf = jointdf.dropna(subset='TRANSACTION DATE')
     cancellations = newdf[newdf['GROSS PREMIUM'] < 0]
@@ -106,7 +106,7 @@ if uploaded_file is not None:
 
     # WEEK 
     # Get transactions done in the current week
-    this_week = newdf[((newdf['TRANSACTION DATE']).dt.date >= start_of_week.date()) & ((newdf['TRANSACTION DATE']).dt.date <= end_of_week.date())]
+    this_week = newdf[((newdf['TRANSACTION DATE']).dt.date >= start_of_week.date()) & ((newdf['TRANSACTION DATE']).dt.date <= end_of_week.date())].copy()
 
     week_gp = this_week['GROSS PREMIUM'].sum()
     week_total_gp = "Ksh. {:,.0f}".format(week_gp)
@@ -127,7 +127,7 @@ if uploaded_file is not None:
 
 
     # MOST RECENT (YESTERDAY)
-    most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()]
+    most_recent_date = newdf[newdf['TRANSACTION DATE'] == newdf['TRANSACTION DATE'].max()].copy()
     first_recent_date = most_recent_date.iloc[-1]   
 
 
