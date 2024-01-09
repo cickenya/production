@@ -170,7 +170,7 @@ if uploaded_file is not None:
         
     else:
         yesterday = most_recent_date['GROSS PREMIUM'].sum()
-        yesterday_receipts = most_recent_date[most_recent_date['RECEIPTS'] > 0].sum()
+        yesterday_receipts = most_recent_date[most_recent_date['RECEIPTS'] > 0].sum().copy()
         yesterday_credit_total = most_recent_date[most_recent_date['NET BALANCE']>0].sum()
         cancelled_yesterday = most_recent_date[most_recent_date['GROSS PREMIUM'] < 0].sum()
        
