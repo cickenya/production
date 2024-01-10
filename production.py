@@ -756,17 +756,5 @@ if uploaded_file is not None:
 
 
 
-        griddf2 = filtered_df[["NEW TM", "INTERMEDIARY", "TRANSACTION DATE", "PRODUCT", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", ]]
-        gd = GridOptionsBuilder.from_dataframe(griddf2) 
-        select = st.radio('', options = ['multiple'])
-        gd.configure_selection(selection_mode = select, use_checkbox=True)
-        gridoptions = gd.build()
-        st.subheader(f"**PREVIEW OF {selected_manager}'S DATA**")
-
-        AgGrid(griddf2, gridOptions=gridoptions)
-
-        if st.button("Download CSV"):
-            csv_data = griddf2.to_csv(index=False, encoding='utf-8')
-            b64 = base64.b64encode(csv_data.encode()).decode()
-            href = f'<a href="data:file/csv;base64,{b64}" download="{selected_manager}.csv">Download CSV</a>'
-            st.markdown(href, unsafe_allow_html=True) 
+        tm_data = filtered_df[["NEW TM", "INTERMEDIARY", "TRANSACTION DATE", "PRODUCT", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", ]]
+        st.dataframe(tm_data)
