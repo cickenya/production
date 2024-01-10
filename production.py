@@ -54,7 +54,7 @@ if uploaded_file is not None:
 
 if uploaded_file is not None:
 
-    view = st.sidebar.radio('Select',['Company', 'Branch', 'Territorial Manager'])
+    view = st.sidebar.radio('Select',['Company','Territorial Manager'])
     df2 = df[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "STAMP DUTY", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "TM"]].copy()   
     df2.loc[df2['INTERMEDIARY'] == 'GWOKA INSURANCE AGENCY', 'BRANCH'] = 'Head Office'
     
@@ -549,95 +549,7 @@ if uploaded_file is not None:
                         st.dataframe(most_recent_date)
                             
 
-    if view == 'Branch':
-        unique = newdf['BRANCH'].unique()
 
-        selected_branch =st.sidebar.selectbox("Choose Branch", unique)
-
-        # Filter the DataFrame based on the selected branch
-        filtered_df = newdf[newdf['BRANCH'] == selected_branch]
-        filtered_df2 = this_week[this_week['BRANCH'] == selected_branch]
-        
-        for_cancellation =  cancellations[cancellations['BRANCH'] == selected_branch]
-
-        nonmotordf = filtered_df[~filtered_df['PRODUCT'].str.contains('Motor')]
-        motordf = filtered_df[filtered_df['PRODUCT'].str.contains('Motor')]
-        nonmotor = nonmotordf['GROSS PREMIUM'].sum()
-        motor = motordf['GROSS PREMIUM'].sum()
-        cancelled = for_cancellation['GROSS PREMIUM'].sum()
-        amount_cancelled = "Ksh. {:,.0f}".format(cancelled)
-        total_mix = (motor+nonmotor)
-        total_mix_result = "{:,.0f}".format(total_mix)
-        mix = (motor/total_mix)*100
-        mix_result = "{:.0f}".format(mix)
-
-        bar_df = filtered_df.groupby('NEW TM')['GROSS PREMIUM'].sum()
-
-        gp = filtered_df['GROSS PREMIUM'].sum()
-        
-        total_gp = "Ksh. {:,.0f}".format(gp)
-
-        receipted = filtered_df['RECEIPTS'].sum()
-        total_receipted = "Ksh. {:,.0f}".format(receipted)
-
-        credit = filtered_df['NET BALANCE'].sum()
-        total_credit = "Ksh. {:,.0f}".format(credit)
-
-        st.subheader(f"{selected_branch} Branch Month To Date Production")
-
-        with card_container(key="chart1"):
-            cc = st.columns(5)
-    
-            with cc[0]:
-            # can just use 'good', 'bad', 'neutral' sentiment to auto color the card
-                hc.info_card(title='Production', content= f'Ksh. {total_mix_result}', content_text_size = 'medium',sentiment='good',bar_value=77, title_text_size='small')
-    
-            with cc[1]:
-                hc.info_card(title='Receipted', content=f'{total_receipted}',bar_value=12, content_text_size = 'medium', sentiment='good', title_text_size='small')
-    
-            with cc[2]:
-                hc.info_card(title='Credit', content=f'{total_credit}', sentiment='neutral', content_text_size = 'medium', bar_value=55, title_text_size='small')
-    
-            with cc[3]:
-                hc.info_card(title='Cancelled', content=f'{amount_cancelled}',bar_value=2, sentiment='bad',title_text_size='small', content_text_size = 'medium')
-    
-            with cc[4]:
-                hc.info_card(title='Portfolio Mix',content=f'{mix_result}% Motor ',key='sec', bar_value=5, content_text_size = 'medium', sentiment='good', title_text_size='small')
-
-        
-        bar_df = filtered_df.groupby('NEW TM')['GROSS PREMIUM'].sum().reset_index()
-        bar_df2 = filtered_df2.groupby('DayOfWeek')['GROSS PREMIUM'].sum().reset_index()
-
-        with card_container(key="chart2"):
-            cols3 = st.columns(2)
-    
-            fig = go.Figure()
-    
-            fig.add_trace(go.Bar( 
-                 width=0.5,
-                 x= bar_df['NEW TM'],
-                 y= bar_df['GROSS PREMIUM']      
-                 ))
-
-            fig.update_layout(title={'text': 'TERRITORIAL MANAGER PERFORMANCE IN BRANCH', 'x': 0.5, 'xanchor': 'center'}, width=525, xaxis=dict(tickfont=dict(size=9))) 
-    
-            with cols3[0]: 
-                st.plotly_chart(fig)
-    
-    
-            fig2 = go.Figure()
-    
-            fig2.add_trace(go.Bar(
-                    width=0.45,
-                     x= bar_df2['DayOfWeek'],
-                     y= bar_df2['GROSS PREMIUM']        
-                     ))
-            
-    
-            fig2.update_layout(title={'text': 'THIS WEEK DAILY PRODUCTION', 'x': 0.5, 'xanchor': 'center'}, width=425, xaxis=dict(categoryorder='array', categoryarray=["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], tickfont=dict(size=9)))
-    
-            with cols3[1]: 
-                st.plotly_chart(fig2)
 
     if view == 'Territorial Manager':
         unique = newdf['NEW TM'].unique()
