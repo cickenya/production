@@ -361,11 +361,11 @@ if uploaded_file is not None:
                     previous_month_name = previous_month.strftime('%B').upper()
     
                     # Use the previous month's name in the header
-                    st.subheader(f"{previous_month_name} PRODUCTION SUMMARY - TARGET KES 45M")
+                    st.subheader(f"{previous_month_name} PRODUCTION SUMMARY")
                 else:
                     # Use the current month's name in the header
                     current_month_name = current_date.strftime('%B').upper()
-                    st.subheader(f"{current_month_name} PRODUCTION SUMMARY - TARGET KES 45M")
+                    st.subheader(f"{current_month_name} PRODUCTION SUMMARY")
                         
                 with card_container(key="month_chart"):
                     cc = st.columns(5)
