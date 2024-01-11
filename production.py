@@ -695,7 +695,7 @@ if uploaded_file is not None:
         week_credit = filtered_data[filtered_data['NET BALANCE'] > 0]
         week_credit_total = filtered_data['NET BALANCE'].sum()
         fom_week_credit = "Ksh. {:,.0f}".format(week_credit_total)   
-        week_cancelled = filtered_data[filtered_data['SUM INSURED'] < 0]
+        week_cancelled = filtered_data[filtered_data['GROSS PREMIUM'] < 0]
         total_cancelled = week_cancelled['GROSS PREMIUM'].sum()
         week_total_cancelled = "Ksh. {:,.0f}".format(total_cancelled)   
 
