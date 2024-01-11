@@ -60,6 +60,12 @@ if uploaded_file is not None:
     
     # Convert the 'Date' column to datetime format
     df2['TRANSACTION DATE'] = pd.to_datetime(df2['TRANSACTION DATE'] , format='%m/%d/%Y')
+    
+    # Replace all occurrences of 2023 with 1/11/2024
+    df2['TRANSACTION DATE'] =  df2['TRANSACTION DATE'].mask(df['your_column'].dt.year == 2023, '2024-01-11')
+    
+    # If you want to keep the column as a datetime type, you can convert it back
+    df2['TRANSACTION DATE'] = pd.to_datetime(df2['TRANSACTION DATE'] , errors='coerce')
 
     # Extract the day of the week, month and create new columns
     df2['DayOfWeek'] = df2['TRANSACTION DATE'].dt.day_name()
