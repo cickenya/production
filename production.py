@@ -643,7 +643,7 @@ if uploaded_file is not None:
             
         else:
             tm_yesterday = most_recent['GROSS PREMIUM'].sum()
-            yesterday_receipts = most_recent.loc[most_recent['RECEIPTS'] > 0, 'RECEIPTS'].sum()
+            yesterday_receipts_total = most_recent.loc[most_recent['RECEIPTS'] > 0, 'RECEIPTS'].sum()
             yesterday_credit_total = most_recent.loc[most_recent['NET BALANCE'] > 0, 'NET BALANCE'].sum()
             cancelled_yesterday = most_recent.loc[most_recent['GROSS PREMIUM'] < 0, 'GROSS PREMIUM'].sum()
        
