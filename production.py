@@ -103,7 +103,9 @@ if uploaded_file is not None:
     joint = pd.merge(df2, lastdf, on='INTERMEDIARY', how='left')
     joint.loc[joint['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
     joint['NEW TM'] = joint['NEW TM'].fillna(joint['TM'])
-    jointdf = joint[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "TM", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
+    jointdf = joint
+    
+    # jointdf = joint[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "TM", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
     
     
     newdf = jointdf.dropna(subset='TRANSACTION DATE')
@@ -441,7 +443,7 @@ if uploaded_file is not None:
                     st.subheader("**Preview of this Month's Data**")
                     month_df = this_month[["NEW TM", "TM", "INTERMEDIARY", "TRANSACTION DATE", "PRODUCT", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", ]]
                     
-                    st.dataframe(month_df)
+                    st.dataframe(jointdf)
                     
 
                 
