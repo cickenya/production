@@ -439,7 +439,7 @@ if uploaded_file is not None:
 
                 with tab2:
                     st.subheader("**Preview of this Month's Data**")
-                    month_df = this_month[["NEW TM", "INTERMEDIARY", "TRANSACTION DATE", "PRODUCT", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", ]]
+                    month_df = this_month[["NEW TM", "TM", "INTERMEDIARY", "TRANSACTION DATE", "PRODUCT", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", ]]
                     
                     st.dataframe(month_df)
                     
