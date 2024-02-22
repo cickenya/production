@@ -101,7 +101,10 @@ if uploaded_file is not None:
     
     jointdf = pd.merge(df2, lastdf, on='INTERMEDIARY', how='left')
     jointdf.loc[jointdf['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
-    jointdf = jointdf[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
+    jointdf = jointdf[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "TM", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
+
+    if jointdf['NEW TM'] == '':
+        jointdf['NEW TM'] = jointdf['TM']
     
     newdf = jointdf.dropna(subset='TRANSACTION DATE')
     cancellations = newdf[newdf['GROSS PREMIUM'] < 0]
