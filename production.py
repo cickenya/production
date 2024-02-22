@@ -103,7 +103,7 @@ if uploaded_file is not None:
     jointdf.loc[jointdf['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
     jointdf = jointdf[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "TM", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
 
-    if jointdf['NEW TM'] == '':
+    if jointdf['NEW TM'] == 'Nan':
         jointdf['NEW TM'] = jointdf['TM']
     
     newdf = jointdf.dropna(subset='TRANSACTION DATE')
