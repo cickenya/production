@@ -100,9 +100,9 @@ if uploaded_file is not None:
     lastdf = pd.DataFrame(data, columns=headers)  # Convert data to a DataFrame
     
     
-    jointdf = pd.merge(df2, lastdf, on='INTERMEDIARY', how='left')
-    jointdf.loc[jointdf['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
-    jointdf['NEW TM'] = jointdf['NEW TM'].replace(np.nan, jointdf['TM'])
+    joint = pd.merge(df2, lastdf, on='INTERMEDIARY', how='left')
+    joint.loc[joint['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
+    joint['NEW TM'].fillna(joint['TM'])
     jointdf = jointdf[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "TM", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
     
     
