@@ -102,8 +102,7 @@ if uploaded_file is not None:
     
     jointdf = pd.merge(df2, lastdf, on='INTERMEDIARY', how='left')
     jointdf.loc[jointdf['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
-    mask = pd.isna(jointdf['NEW TM'])
-    jointdf.loc[mask, 'NEW TM'] = jointdf.loc[mask, 'TM']
+    jointdf['NEW TM'] = jointdf['NEW TM'].replace(np.nan, jointdf['TM'])
     jointdf = jointdf[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "TM", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
     
     
