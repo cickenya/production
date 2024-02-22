@@ -102,7 +102,7 @@ if uploaded_file is not None:
     
     joint = pd.merge(df2, lastdf, on='INTERMEDIARY', how='left')
     joint.loc[joint['INTERMEDIARY'].str.contains('REIN', case=False, na=False), 'NEW TM'] = 'REINSURANCE'
-    joint['NEW TM'].fillna(joint['TM'])
+    joint['NEW TM'] = joint['NEW TM'].fillna(joint['TM'])
     jointdf = joint[["TRANSACTION DATE", "BRANCH", "INTERMEDIARY TYPE", "INTERMEDIARY", "PRODUCT", "PORTFOLIO MIX", "SALES TYPE", "SUM INSURED", "GROSS PREMIUM", "NET BALANCE", "RECEIPTS", "TM", "NEW TM", "MONTH NAME", "DayOfWeek"]].copy()
     
     
