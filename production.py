@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 from datetime import timedelta
 import base64
 import hydralit_components as hc
+import numpy as np
 
 # Define your Google Sheets credentials JSON file (replace with your own)
 credentials_path = 'hackathon-405309-35c43230bdce.json'
